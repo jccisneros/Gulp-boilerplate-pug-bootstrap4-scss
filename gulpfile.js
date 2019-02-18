@@ -13,10 +13,10 @@ gulp.task('pug', () => {
 gulp.task('sass', () => {
     return gulp.src([
         'node_modules/bootstrap/scss/bootstrap.scss',
-        'src/scss/*.scss'
+        'src/dev/scss/*.scss'
     ])
     .pipe(sass({outputStyle: 'compressed'}))
-    .pipe(gulp.dest('src/css'))
+    .pipe(gulp.dest('src/dist/css'))
     .pipe(browserSync.stream());
 });
 
@@ -26,7 +26,7 @@ gulp.task('js', () => {
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/popper.js/dist/umd/popper.min.js'
     ])
-    .pipe(gulp.dest('src/js'))
+    .pipe(gulp.dest('src/dist/js'))
     .pipe(browserSync.stream());
 });
 
@@ -36,7 +36,7 @@ gulp.task('serve', ['sass', 'pug'], () => {
     });
     gulp.watch([
         'node_modules/bootstrap/scss/bootstrap.scss',
-        'src/scss/*.scss',
+        'src/dev/scss/*.scss',
         'src/dev/views/**/*.pug'
     ], ['sass', 'pug']);
     gulp.watch('src/dist/*.html').on('change', browserSync.reload);
@@ -44,12 +44,12 @@ gulp.task('serve', ['sass', 'pug'], () => {
 
 gulp.task('fa', () =>{
     return gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
-    .pipe(gulp.dest('src/css'));
+    .pipe(gulp.dest('src/dist/css'));
 });
 
 gulp.task('fonts', () =>{
     return gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('src/fonts'));
+    .pipe(gulp.dest('src/dist/fonts'));
 });
 
 gulp.task('default', ['js', 'serve', 'fa', 'fonts']);
